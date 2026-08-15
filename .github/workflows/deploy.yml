@@ -2,7 +2,7 @@ name: Deploy Frontend to GitHub Pages
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -28,14 +28,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: yarn
-          cache-dependency-path: frontend/yarn.lock
 
       - name: Install dependencies
         run: yarn install --ignore-engines --network-timeout 100000
 
-      - name: Build
-        run: yarn build
+      - name: Build production bundle
+        run: |
+          yarn build
+          rm -rf dist
+          mv build dist
         env:
           CI: false
           PUBLIC_URL: /JawyXdevs-portfolio
@@ -44,7 +45,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: frontend/build
+          path: frontend/dist
 
   deploy:
     needs: build
