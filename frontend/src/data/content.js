@@ -7,7 +7,7 @@
 export const BRAND = {
   name: "JAWYX DEVS",
   tagline: "Elite Web Engineering Studio",
-  logo: "/assets/jawyx-logo-crop.png",
+  logo: `${process.env.PUBLIC_URL || ""}/assets/jawyx-logo-crop.png`,
 };
 
 export const NAV_LINKS = [

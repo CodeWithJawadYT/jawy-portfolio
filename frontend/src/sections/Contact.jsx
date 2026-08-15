@@ -30,6 +30,16 @@ export const Contact = () => {
       return;
     }
     setSending(true);
+    if (!process.env.REACT_APP_BACKEND_URL) {
+      const text = encodeURIComponent(
+        `Hi JAWYX DEVS! I'm ${form.name} (${form.email}).\n\n${form.message}`
+      );
+      window.open(`${CONTACT.whatsappUrl}?text=${text}`, "_blank", "noopener");
+      toast.success("Opening WhatsApp with your message.");
+      setForm({ name: "", email: "", message: "" });
+      setSending(false);
+      return;
+    }
     try {
       await axios.post(`${API}/contact`, form);
       toast.success("Message sent — we'll get back to you soon.");
