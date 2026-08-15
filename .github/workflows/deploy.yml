@@ -39,7 +39,7 @@ jobs:
           mv build dist
         env:
           CI: false
-          PUBLIC_URL: /JawyXdevs-portfolio
+          PUBLIC_URL: /real-jawyXdevs
           REACT_APP_BACKEND_URL: ${{ vars.REACT_APP_BACKEND_URL }}
 
       - name: Upload Pages artifact
